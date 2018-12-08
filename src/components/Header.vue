@@ -1,9 +1,9 @@
 <template>
 <div class="header">
-    <mt-header title="乐淘商城购物">
+    <mt-header title="乐淘商城购物" fixed>
     <div slot="left">
       <mt-button
-      ></mt-button>
+      >返回</mt-button>
     </div>
     <mt-button
       slot="right"
@@ -19,11 +19,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.header{
-    margin: 0px;
-    padding: 0px;
-}
-.mt-header{
-    width: 100%;
-}
 </style>
