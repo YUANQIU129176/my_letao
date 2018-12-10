@@ -10,11 +10,11 @@
       <span class="searchBtn">搜索</span>
     </div>
     <div class="lt_sorder">
-      <a href="javascript:;">上架时间
-        <span class="fa fa-angle-down"></span>
+      <a href="javascript:;" @click="isActive = !isActive;begin=0" :class="{'active':begin===0}">上架时间
+        <span :class="{'fa':true,'fa-angle-down':isActive,'fa-angle-up':!isActive}" ></span>
       </a>
-      <a href="javascript:;">价格
-        <span class="fa fa-angle-down"></span>
+      <a href="javascript:;" :class="{'active':begin===1}" @click="handlerPrice">价格
+        <span :class="{'fa':true, 'fa-angle-down':hasPrice,'fa-angle-up':!hasPrice}"></span>
       </a>
       <a href="javascript:;">销量
         <span class="fa fa-angle-down"></span>
@@ -44,28 +44,59 @@
 <script>
 /*
   完成点击列表按钮排序是触发的变化
+  1 使用动态绑定类来改变其需要修改的样式
 */
 import {getProductList} from '@/api'
 export default {
   data () {
     return {
+      hasPrice: true,
+      begin: 0,
+      isActive: true,
       searchKey: '',
       allLoaded: false,
       keyval: '',
       page: 1,
       pageSize: 2,
-      dataLists: []
+      dataLists: [],
+      // 确定一个值然后传递过来
+      sort: {}
     }
   },
   mounted () {
     //   获取传递过来的搜索名字
     this.keyval = this.$route.params.key
     console.log(this.keyval)
+    // 调用方法渲染
     this.init()
   },
   methods: {
+    // 价格
+    handlerPrice () {
+      // 控制箭头
+      this.hasPrice = !this.hasPrice
+      // 控制颜色
+      this.begin = 1
+      // 把开着的变成默认值
+      this.isActive = true
+      // 完成下拉列表的渲染
+
+      // 点击之前先判断箭头的方向 如果是向上则为升序 否则为降序
+      var psort = this.hasPrice ? 2 : 1
+
+      // sort值如果在销量和别的地方则数据不同需要清空
+      this.sort = {}
+      // 发送请求之前先把原来的值给请空重新渲染
+      this.dataLists.length = 0
+      // 把升序或降序的数字存储在sortz中
+      this.sort.price = psort
+      // 同时让页面page==1不然page一直添加达不到预定的效果
+      this.page = 1
+      // 最后渲染页面
+      this.init()
+    },
     init () {
-      getProductList({keyval: this.keyval, page: this.page, pageSize: this.pageSize}).then(res => {
+      getProductList({keyval: this.keyval, page: this.page, pageSize: this.pageSize, ...this.sort}).then(res => {
         console.log(res)
         // 赋值
         // 判断是否还有数据 如果没有了 则停止刷新
@@ -169,5 +200,8 @@ export default {
   .pbox:nth-of-type(even) {
     margin-left: 4%;
   }
+}
+.actives{
+  color:blue;
 }
 </style>
