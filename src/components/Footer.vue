@@ -1,14 +1,17 @@
 <template>
-  <div class="footer">
-    <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item id="tab1">
+  <div class="goodsFoot">
+    <mt-tabbar
+      v-model="selected"
+      fixed
+    >
+      <mt-tab-item id="tab1" href='#/home'>
         <div
           slot='icon'
           class="fa fa-home"
         ></div>
         首页
       </mt-tab-item>
-      <mt-tab-item id="tab2">
+      <mt-tab-item id="tab2" href='#/category'>
         <div
           slot='icon'
           class="fa fa-bars"
@@ -20,7 +23,6 @@
           slot='icon'
           class="fa fa-shopping-cart"
         ></div>
-
         购物车
       </mt-tab-item>
       <mt-tab-item id="tab4">
@@ -43,4 +45,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  .goodsFoot{
+    // height: 200px;
+  }
 </style>

@@ -1,13 +1,14 @@
 <template>
 <div class="header">
-    <mt-header title="乐淘商城购物" fixed>
-    <div slot="left">
-      <mt-button
-      >返回</mt-button>
-    </div>
+    <mt-header :title="$store.state.title" fixed>
+    <router-link
+        slot="left"
+        to=''
+      >
+        <mt-button v-show='$route.path!=="/home"' @click="$router.back(-1)">返回</mt-button>
+      </router-link>
     <mt-button
-      slot="right"
-    >搜索</mt-button>
+      slot="right" @click="$router.push({name:'search'})">搜索</mt-button>
   </mt-header>
 </div>
 </template>

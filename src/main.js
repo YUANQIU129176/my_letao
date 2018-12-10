@@ -7,10 +7,13 @@ import '@/assets/fa/css/font-awesome.css'
 import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import store from '@/store/store.js'
 Vue.config.productionTip = false
 Vue.use(MintUI)
 /* eslint-disable no-new */
 new Vue({
+  // 注入
+  store,
   el: '#app',
   router,
   components: { App },

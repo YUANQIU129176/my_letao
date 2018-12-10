@@ -1,6 +1,6 @@
 <template>
-    <div class="contents">
-     <router-view></router-view>
+    <div class="content">
+        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -11,9 +11,10 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-.contents{
+.content{
     padding-top: 40px;
     padding-bottom: 60px;
     height: 100%;
+    // overflow: scroll;
 }
 </style>
